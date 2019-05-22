@@ -1,0 +1,266 @@
+///////////////     1
+
+class Author {
+    constructor(name, email, gender) {
+        this._name = name;
+        this._email = email;
+        this._gender = gender;
+    };
+
+    get name() {
+        return this._name;
+    };
+    set name(temp) {
+        this._name = temp;
+    };
+
+    get email() {
+        return this._email;
+    };
+    set email(temp) {
+        this._email = temp;
+    };
+
+    get gender() {
+        return this.gender;
+    };
+    set gender(temp) {
+        this._gender = temp;
+    }
+
+    toString() {
+        return `Authors name is ${this.name}`
+    }
+}
+
+
+class Book {
+    constructor(title, name, email, gender, price, quantity) {
+
+        this._title = title;
+        this._author = new Author(name, email, gender);
+        this._price = price;
+        this._quantity = quantity;
+    }
+
+    get title() {
+        return this._title;
+    };
+    set title(temp) {
+        this._title = temp;
+    }
+    get author() {
+        return this._author;
+    };
+
+    get price() {
+        return this._price;
+    };
+    set price(temp) {
+        this._price = temp;
+    }
+    get quantity() {
+        return this._price;
+    };
+    set quantity(temp) {
+        this._quantity = temp;
+    }
+
+    getProfit() {
+        return this._price * this._quantity;
+    }
+    toString() {
+        return `Books name is ${this.title},${this.author._name}`
+    }
+}
+
+let book1 = new Book("booksname", "authorsname", "authorsemail", "male", 500, 10);
+console.log(book1._price);
+console.log(book1._title);
+console.log(book1._author);
+console.log(book1.getProfit());
+alert(book1);
+
+////////////    2
+
+class Account {
+    constructor(id, name, balance) {
+        this._id = id;
+        this._name = name;
+        this._balance = balance;
+    }
+
+    static identifyAccounts(first, second) {
+        if (first.id === second.id && first.name === second.name && first.balance === second.balance)
+            return true;
+        else return false;
+    }
+
+    get id() {
+        return this._id;
+    }
+
+    get name() {
+        return this._name;
+    }
+    set name(value) {
+        this._name = value;
+    }
+    get balance() {
+        return this._balance;
+    }
+    set balance(value) {
+        this._balance = value;
+    }
+
+    credit(money) {
+        this.balance += money;
+        return this.balance;
+    }
+
+    debit(money) {
+        if (money > this.balance) {
+            return `Amount exceeded balance. ${this.balance}`;
+        }
+        this.balance -= money;
+        return this.balance;
+    }
+    transferTo(acc2, money) {
+        if (money > this.balance) {
+            return `Amount exceeded balance. ${this.balance}`;
+        }
+        acc2.balance += money;
+        this.balance -= money;
+        return this.balance;
+    }
+    toString() {
+        return `Accaounts name is ${this.name}, balance ${this.balance}`;
+    }
+}
+
+let myCart = new Account(11, "myname", 5000);
+
+console.log(myCart._id);
+console.log(myCart._name);
+console.log(myCart.debit(100))
+console.log(myCart._balance)
+console.log(myCart.debit(10000))
+
+////////    3
+
+
+class Person {
+    constructor(firstName, lastName, gender, age) {
+        this._firstName = firstName;
+        this._lastName = lastName;
+        this._gender = gender;
+        this._age = age;
+    }
+    get firstName() {
+        return this._firstName
+    };
+    set firstName(value) {
+        this._firstName = value
+    };
+    get lastName() {
+        return this.lastName
+    }
+    set lastName(value) {
+        this._lastName = value
+    }
+    get age() {
+        return this._age
+    }
+    set age(value) {
+        this._age = value
+    }
+    get gender() {
+        return this._gender
+    }
+    set gender(value) {
+        this._gender = value
+    }
+
+    toString() {
+        return " Persons fullname is ${this.firstName} ${this.lastName}"
+    }
+}
+
+class Student extends Person {
+    constructor(firstName, lastName, gender, age, programs, year, fee) {
+        super(firstName, lastName, gender, age);
+        this._programs = programs;
+        this._year = year;
+        this._fee = fee;
+        this._grade = [];
+    }
+    get programs() {
+        return this._programs;
+    }
+    set programs(value) {
+        this._programs = value
+    }
+
+    get year() {
+        return this._year
+    }
+    set year(value) {
+        this._year = value
+    }
+    get year() {
+        return this._year
+    }
+    set year(value) {
+        this._year = value
+    }
+    get fee() {
+        return this._fee
+    }
+    set fee(value) {
+        this._fee = value
+    }
+
+    passExam(program, grade) {
+        let flag = true;
+        this._grade[this.programs.indexOf(program)] = grade;
+        for (let i = 0; i < this.programs.length; i++) {
+            if (this._grade[i] <= 50 || this._grade[i] == undefined)
+                flag = false;
+        } if (flag) this.year++;
+    }
+    toString() {
+        return `name is ${this.name}, surname is ${this.lastName}`;
+    }
+}
+
+class Teacher extends Person {
+    constructor(firstName, lastName, gender, age, program, pay) {
+        super(firstName, lastName, gender, age);
+        this._program = program;
+        this._pay = pay;
+    }
+    get program() {
+        return this._program
+    }
+    set program(value) {
+        this._program = value
+    }
+    get pay() {
+        return this._pay
+    }
+    set pay(value) {
+        this._pay = value
+    }
+
+    toString() {
+        return ` name is ${this.name},surname is ${this.lastName}`;
+    }
+}
+
+
+let stud = new Student('henry', 'ford', 'male', 24, ['math', 'english', 'physics'], 3, 100);
+stud.passExam("english", 60);
+stud.passExam("math", 60);
+stud.passExam("physics", 60);
+console.log(stud.programs);
+console.log(stud._year)
